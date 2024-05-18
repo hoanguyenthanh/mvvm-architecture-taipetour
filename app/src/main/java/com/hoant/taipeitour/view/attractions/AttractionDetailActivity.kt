@@ -13,6 +13,7 @@ import com.hoant.taipeitour.repository.api.ApiClient
 import com.hoant.taipeitour.repository.model.Attraction
 import com.hoant.taipeitour.repository.repo.AttractionRepository
 import com.hoant.taipeitour.util.Utils
+import com.hoant.taipeitour.view.webview.WebviewFragment
 import com.hoant.taipeitour.viewmodel.attraction.AttractionViewModel
 
 class AttractionDetailActivity: BaseActivity<AttractionViewModel, ActivityAttractionDetailBinding, BaseRepository>() {
@@ -35,6 +36,7 @@ class AttractionDetailActivity: BaseActivity<AttractionViewModel, ActivityAttrac
         super.onCreate(savedInstanceState)
         setData()
         setToolbar()
+        setListener()
     }
 
     private fun setData() {
@@ -46,17 +48,37 @@ class AttractionDetailActivity: BaseActivity<AttractionViewModel, ActivityAttrac
 
         viewModel.attraction.value?.let {
             Utils.textHtmlFormat(binding.tvIntroduction, it.introduction)
-            Utils.textSpannable(binding.tvLink, it.officialSite)
+            Utils.textSpannable(binding.tvOfficialSite, it.officialSite)
         }
     }
 
     private fun setToolbar() {
-        setSupportActionBar(binding.toolbarHeader)
-        binding.ivBack.setOnClickListener {
+        setSupportActionBar(binding.layoutToolbar.toolbar)
+        binding.layoutToolbar.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
+
+    private fun setListener() {
+        binding.tvOfficialSite.setOnClickListener {
+            viewModel.attraction.value?.officialSite?.let {
+                openOfficialSite(it)
+            }
+        }
+    }
+
+    private fun openOfficialSite(url: String) {
+        val webViewFragment = WebviewFragment()
+        webViewFragment.arguments = Bundle().apply {
+            putString(WebviewFragment.KEY_DATA_URL, url)
+        }
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContent, webViewFragment,  WebviewFragment::class.simpleName)
+            .addToBackStack(null)
+            .commit()
     }
 }

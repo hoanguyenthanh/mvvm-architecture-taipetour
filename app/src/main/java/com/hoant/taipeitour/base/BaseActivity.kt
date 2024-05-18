@@ -32,5 +32,4 @@ abstract class BaseActivity < VM: BaseViewModel, B : ViewDataBinding, R : BaseRe
     abstract fun getRepository() : R
 
     abstract fun getViewModelClass() : Class<VM>
-
 }
