@@ -2,31 +2,31 @@ package com.hoant.taipeitour.view.attractions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.hoant.taipeitour.base.BaseAdapter
 import com.hoant.taipeitour.databinding.ItemAttractionBinding
 import com.hoant.taipeitour.repository.model.Attraction
 import com.hoant.taipeitour.util.Utils
 
-class AttractionsAdapter : RecyclerView.Adapter<AttractionsAdapter.AttractionViewHolder>() {
+class AttractionsAdapter(onItemClick: OnItemClick<Attraction>): BaseAdapter<Attraction, ItemAttractionBinding>(onItemClick) {
 
-    inner class AttractionViewHolder(val binding: ItemAttractionBinding): ViewHolder(binding.root)
+    override var variableId: Int? = BR.attraction
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttractionViewHolder {
-        val binding = ItemAttractionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AttractionViewHolder(binding)
+    override fun getBinding(parent: ViewGroup, viewType: Int): ItemAttractionBinding {
+        return ItemAttractionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
-    override fun onBindViewHolder(holder: AttractionViewHolder, position: Int) {
-        with(holder) {
-            with( differ.currentList[position]) {
-                binding.tvTitle.text = this.name
-                binding.tvDescription.text = this.introduction
-                if (this.images.isNotEmpty()) {
-                    Utils.loadImage(holder.itemView.context, this.images[0].src, binding.ivImage)
-                }
+    override fun getItem(position: Int): Attraction {
+        return differ.currentList[position]
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
+        with(differ.currentList[position]) {
+            if (this.images.isNotEmpty()) {
+                Utils.loadImage(holder.itemView.context, this.images[0].src, binding.ivImage)
             }
         }
     }

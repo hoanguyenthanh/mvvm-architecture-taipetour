@@ -10,16 +10,24 @@ abstract class BaseActivity < VM: BaseViewModel, B : ViewDataBinding, R : BaseRe
     protected lateinit var viewModel: VM
     protected var mPage = 1
 
+
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = getViewBinding() as B
-
         val factory = ViewModelProviderFactory(application, getRepository())
-        viewModel = ViewModelProvider(this, factory).get(getViewModelClass())
+        viewModel = ViewModelProvider(this, factory)[getViewModelClass()]
+
+        binding = getViewBinding()
+        binding.lifecycleOwner = this
+        variableId?.let {
+            binding.setVariable(it, viewModel)
+            binding.executePendingBindings()
+        }
     }
 
-    abstract fun getViewBinding() : ViewDataBinding
+    abstract var variableId: Int?
+
+    abstract fun getViewBinding(): B
 
     abstract fun getRepository() : R
 

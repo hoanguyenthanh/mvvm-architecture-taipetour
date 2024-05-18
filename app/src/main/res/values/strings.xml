@@ -3,4 +3,7 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="network_failure">Network Failure</string>
     <string name="conversion_error">Conversion Error</string>
+
+    <string name="address">Address</string>
+    <string name="last_updated_time">Last Updated Time</string>
 </resources>

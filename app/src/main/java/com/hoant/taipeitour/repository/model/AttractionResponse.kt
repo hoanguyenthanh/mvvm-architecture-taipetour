@@ -9,13 +9,10 @@ data class AttractionResponse(
     var data: List<Attraction> = arrayListOf(),
 )
 
+@Parcelize
 data class Attraction(
     val id: Long,
     val name: String,
-    @SerializedName("name_zh")
-    val nameZh: Any?,
-    @SerializedName("open_status")
-    val openStatus: Long,
     val introduction: String,
     @SerializedName("open_time")
     val openTime: String,
@@ -39,29 +36,30 @@ data class Attraction(
     val category: List<Category>,
     val target: List<Target>,
     val service: List<Service>,
-    val friendly: List<Any?>,
     val images: List<Image>,
-    val files: List<Any?>,
-    val links: List<Any?>,
-)
+): Parcelable
 
+@Parcelize
 data class Category(
     val id: Long,
     val name: String,
-)
+): Parcelable
 
+@Parcelize
 data class Target(
     val id: Long,
     val name: String,
-)
+): Parcelable
 
+@Parcelize
 data class Service(
     val id: Long,
     val name: String,
-)
+): Parcelable
 
+@Parcelize
 data class Image(
     val src: String,
     val subject: String,
     val ext: String,
-)
+): Parcelable

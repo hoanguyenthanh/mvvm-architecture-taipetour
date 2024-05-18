@@ -3,13 +3,14 @@ package com.hoant.taipeitour.viewmodel.attraction
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hoant.taipeitour.repository.model.Resource
-import com.hoant.taipeitour.util.Utils.hasInternetConnection
 import com.hoant.taipeitour.MyApplication
 import com.hoant.taipeitour.R
-import com.hoant.taipeitour.repository.model.AttractionResponse
-import com.hoant.taipeitour.repository.repo.AttractionRepository
 import com.hoant.taipeitour.base.BaseViewModel
+import com.hoant.taipeitour.repository.model.Attraction
+import com.hoant.taipeitour.repository.model.AttractionResponse
+import com.hoant.taipeitour.repository.model.Resource
+import com.hoant.taipeitour.repository.repo.AttractionRepository
+import com.hoant.taipeitour.util.Utils.hasInternetConnection
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -18,6 +19,7 @@ class AttractionViewModel(
     private val attractionRepository: AttractionRepository
 ) : BaseViewModel(app) {
 
+    val attraction: MutableLiveData<Attraction> = MutableLiveData()
     val attractionsResponse: MutableLiveData<Resource<AttractionResponse>> = MutableLiveData()
 
     fun getAttractions(lang: String, page: Int) = viewModelScope.launch {

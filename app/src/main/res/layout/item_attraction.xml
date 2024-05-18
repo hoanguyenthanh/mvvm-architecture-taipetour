@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="attraction"
+            type="com.hoant.taipeitour.repository.model.Attraction" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,15 +39,17 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:maxLines="2"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                android:text="@{attraction.name}"/>
 
             <TextView
-                android:id="@+id/tvDescription"
+                android:id="@+id/tvIntroduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@color/light_gray"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                android:text="@{attraction.introduction}"/>
         </LinearLayout>
 
         <ImageView

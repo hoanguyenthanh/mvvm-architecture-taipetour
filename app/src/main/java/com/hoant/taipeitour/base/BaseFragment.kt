@@ -11,24 +11,27 @@ import androidx.lifecycle.ViewModelProvider
 import com.hoant.taipeitour.MyApplication
 
 abstract class BaseFragment < VM :ViewModel, B : ViewDataBinding, R : BaseRepository> : Fragment(){
-    protected lateinit var binding : B
+    protected lateinit var binding: B
     protected lateinit var viewModel: VM
 
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = getFragmentBinding(inflater,container) as B
+        binding = getViewBinding(inflater, container) as B
 
-        val factory = ViewModelProviderFactory(MyApplication.instance, getFragmentRepository())
-        viewModel = ViewModelProvider(this,factory).get(getViewModel())
+        val factory = ViewModelProviderFactory(MyApplication.instance, getRepository())
+        viewModel = ViewModelProvider(this,factory).get(getViewModelClass())
 
         return binding.root
     }
 
-    abstract fun getFragmentBinding(inflater: LayoutInflater,container: ViewGroup?) : ViewDataBinding
+    abstract fun getViewBinding(inflater: LayoutInflater,container: ViewGroup?) : ViewDataBinding
 
-    abstract fun getFragmentRepository() : R
+    abstract fun getRepository() : R
 
-    abstract fun getViewModel() : Class<VM>
+    abstract fun getViewModelClass() : Class<VM>
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }
