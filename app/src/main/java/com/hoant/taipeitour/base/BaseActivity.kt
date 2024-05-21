@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.hoant.taipeitour.MyApplication
 
 abstract class BaseActivity < VM: BaseViewModel, B : ViewDataBinding, R : BaseRepository> : AppCompatActivity(){
     protected lateinit var binding : B
@@ -14,7 +15,7 @@ abstract class BaseActivity < VM: BaseViewModel, B : ViewDataBinding, R : BaseRe
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = ViewModelProviderFactory(application, getRepository())
+        val factory = ViewModelProviderFactory(MyApplication.instance, getRepository())
         viewModel = ViewModelProvider(this, factory)[getViewModelClass()]
 
         binding = getViewBinding()

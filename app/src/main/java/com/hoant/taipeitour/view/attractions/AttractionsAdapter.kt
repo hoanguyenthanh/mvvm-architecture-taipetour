@@ -2,9 +2,12 @@ package com.hoant.taipeitour.view.attractions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.hoant.taipeitour.R
 import com.hoant.taipeitour.base.BaseAdapter
 import com.hoant.taipeitour.databinding.ItemAttractionBinding
 import com.hoant.taipeitour.repository.model.Attraction

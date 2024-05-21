@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/AttractionsFragment">
+
+    <fragment
+        android:id="@+id/AttractionsFragment"
+        android:name="com.hoant.taipeitour.view.attractions.AttractionsFragment"
+        android:label="@string/taipeitour"
+        tools:layout="@layout/fragment_attraction">
+
+        <action
+            android:id="@+id/action_Attractions_to_AttractionDetail"
+            app:destination="@id/AttractionDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AttractionDetailFragment"
+        android:name="com.hoant.taipeitour.view.attractions.AttractionDetailFragment"
+        android:label="@string/attraction_detail"
+        tools:layout="@layout/fragment_attraction_detail">
+
+        <action
+            android:id="@+id/action_AttractionDetail_to_Attractions"
+            app:destination="@id/AttractionsFragment" />
+    </fragment>
+</navigation>

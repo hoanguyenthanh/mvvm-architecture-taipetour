@@ -10,8 +10,5 @@ class MyApplication : Application() {
 
     companion object {
         lateinit var instance: MyApplication
-        fun applicationContext() : Context {
-            return instance.applicationContext
-        }
     }
 }

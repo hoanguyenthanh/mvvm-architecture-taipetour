@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="MyApp.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-         <item name="colorPrimary">@color/colorPrimary</item>
+    <style name="TourApp.Main" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 </resources>
