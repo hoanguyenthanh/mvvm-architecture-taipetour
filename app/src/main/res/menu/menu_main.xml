@@ -4,8 +4,8 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/action_switch_language"
-        android:title="@string/action_settings"
         android:icon="@drawable/ic_switch_language"
         android:iconTint="@android:color/black"
-        app:showAsAction="always"/>
+        android:title="@string/action_settings"
+        app:showAsAction="always" />
 </menu>

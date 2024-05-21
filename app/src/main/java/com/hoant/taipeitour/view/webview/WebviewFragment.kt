@@ -1,11 +1,18 @@
 package com.hoant.taipeitour.view.webview
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import com.hoant.taipeitour.MainActivity
+import com.hoant.taipeitour.R
 import com.hoant.taipeitour.databinding.FragmentWebviewBinding
 
 class WebviewFragment: Fragment() {
@@ -13,10 +20,17 @@ class WebviewFragment: Fragment() {
         val KEY_DATA_URL = "key_data_url"
     }
 
-    private var binding: FragmentWebviewBinding? = null
+    private var viewBinding: FragmentWebviewBinding? = null
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        setHasOptionsMenu(false)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentWebviewBinding.inflate(layoutInflater, container, false)
-        return binding?.root
+        viewBinding = FragmentWebviewBinding.inflate(layoutInflater, container, false)
+        return viewBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,18 +41,46 @@ class WebviewFragment: Fragment() {
     }
 
     private fun initWebview(url: String) {
-        binding?.webview?.apply {
+        setTitle(url)
+        viewBinding?.webview?.apply {
             loadUrl(url)
-            settings.allowContentAccess = true
-            settings.allowFileAccess = true
             settings.javaScriptEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = false
+            settings.loadsImagesAutomatically = true
             setBackgroundColor(Color.TRANSPARENT)
+        }
+        viewBinding?.webview?.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                viewBinding?.progressbar?.visibility = View.GONE
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                viewBinding?.progressbar?.visibility = View.VISIBLE
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        viewBinding = null
+    }
+
+
+    private fun setTitle(url: String) {
+        if (activity is MainActivity) {
+            (activity as MainActivity).configToolbar(url)
+        }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.action_switch_language).apply {
+            isVisible = false
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 }

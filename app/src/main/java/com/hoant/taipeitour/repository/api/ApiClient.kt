@@ -1,7 +1,6 @@
 package com.hoant.taipeitour.repository.api
 
 import com.hoant.taipeitour.repository.api.service.AttractionApi
-import com.hoant.taipeitour.repository.api.service.HomeApi
 import com.hoant.taipeitour.util.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,10 +23,6 @@ class ApiClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
                 .build()
-        }
-
-        val homeApi: HomeApi by lazy {
-            client.create(HomeApi::class.java)
         }
 
         val attractionApi: AttractionApi by lazy {

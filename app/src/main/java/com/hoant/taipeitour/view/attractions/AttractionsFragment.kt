@@ -19,6 +19,7 @@ import com.hoant.taipeitour.repository.api.ApiClient
 import com.hoant.taipeitour.repository.model.Attraction
 import com.hoant.taipeitour.repository.model.Resource
 import com.hoant.taipeitour.repository.repo.AttractionRepository
+import com.hoant.taipeitour.util.Constants
 import com.hoant.taipeitour.util.errorSnack
 import com.hoant.taipeitour.viewmodel.attraction.AttractionViewModel
 
@@ -46,9 +47,6 @@ class AttractionsFragment : BaseFragment<AttractionViewModel, FragmentAttraction
         val factory = ViewModelProviderFactory(app, createRepository())
         return ViewModelProvider(viewModelStore, factory).get(AttractionViewModel::class.java)
     }
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initObserves()
@@ -91,16 +89,16 @@ class AttractionsFragment : BaseFragment<AttractionViewModel, FragmentAttraction
     }
 
     private fun hideProgressBar() {
-        viewDataBinding.progress.visibility = View.GONE
+        viewDataBinding.progressbar.visibility = View.GONE
     }
 
     private fun showProgressBar() {
-        viewDataBinding.progress.visibility = View.VISIBLE
+        viewDataBinding.progressbar.visibility = View.VISIBLE
     }
 
     override fun onItemCLicked(item: Attraction) {
         val bundle = Bundle().apply {
-            putParcelable("attraction", item)
+            putParcelable(Constants.ATTRACTION_DATA_KEY, item)
         }
         findNavController().navigate(R.id.action_Attractions_to_AttractionDetail, bundle)
     }

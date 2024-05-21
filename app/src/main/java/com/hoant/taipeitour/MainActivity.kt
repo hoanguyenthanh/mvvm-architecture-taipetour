@@ -30,7 +30,6 @@ class MainActivity: AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-
         return true
     }
 
@@ -44,5 +43,10 @@ class MainActivity: AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+
+    fun configToolbar(title: String) {
+        supportActionBar?.title = title
     }
 }

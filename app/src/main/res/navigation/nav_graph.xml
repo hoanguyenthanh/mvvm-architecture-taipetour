@@ -21,9 +21,20 @@
         android:name="com.hoant.taipeitour.view.attractions.AttractionDetailFragment"
         android:label="@string/attraction_detail"
         tools:layout="@layout/fragment_attraction_detail">
-
         <action
             android:id="@+id/action_AttractionDetail_to_Attractions"
             app:destination="@id/AttractionsFragment" />
+
+        <action
+            android:id="@+id/action_AttractionDetail_to_Webview"
+            app:destination="@id/webviewFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/webviewFragment"
+        android:name="com.hoant.taipeitour.view.webview.WebviewFragment"
+        tools:layout="@layout/fragment_webview">
+        <action
+            android:id="@+id/action_Webview_to_AttractionDetailFragment"
+            app:destination="@id/AttractionDetailFragment"/>
     </fragment>
 </navigation>
