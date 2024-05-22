@@ -60,9 +60,9 @@ object Utils {
 
     fun loadImage(context: Context, url: String, image: ImageView) {
         val requestOptions: RequestOptions = RequestOptions()
-            .placeholder(R.mipmap.image_place_holder)
-            .error(R.mipmap.image_place_holder)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .placeholder(R.drawable.image_loading)
+            .error(R.drawable.image_place_holder)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
 
 
         Glide.with(context)

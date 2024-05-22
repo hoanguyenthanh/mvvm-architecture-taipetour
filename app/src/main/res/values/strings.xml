@@ -1,13 +1,15 @@
-<resources>
-    <string name="app_name">Taipei Tours</string>
-    <string name="no_internet_connection">No internet connection</string>
-    <string name="network_failure">Network Failure</string>
-    <string name="conversion_error">Conversion Error</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">Taipei Tours</string>
+    <string name="no_internet_connection" translatable="false">No internet connection</string>
+    <string name="network_failure" translatable="false">Network Failure</string>
+    <string name="conversion_error" translatable="false">Conversion Error</string>
+
+
+    <string name="taipeitour" translatable="false">TaipeiTour</string>
+    <string name="attraction_detail" translatable="false">Attraction Detail</string>
+    <string name="action_settings" translatable="false">Settings</string>
 
     <string name="selection_language">Selection language</string>
-    <string name="taipeitour">TaipeiTour</string>
-    <string name="attraction_detail">Attraction Detail</string>
-    <string name="action_settings">Settings</string>
     <string name="address">Address</string>
     <string name="last_updated_time">Last Updated Time</string>
 

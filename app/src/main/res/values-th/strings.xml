@@ -1,0 +1,5 @@
+<resources>
+    <string name="selection_language">ภาษาที่เลือก</string>
+    <string name="address">ที่อยู่</string>
+    <string name="last_updated_time">เวลาที่อัปเดตล่าสุด</string>
+</resources>

@@ -1,11 +1,13 @@
 package com.hoant.taipeitour.base
 
-import android.content.res.Configuration
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.hoant.taipeitour.MyApplication
+import com.hoant.taipeitour.util.Constants
+import com.hoant.taipeitour.util.SharedPref
 import java.util.Locale
 
 
@@ -37,23 +39,31 @@ abstract class BaseActivity < VM: BaseViewModel, B : ViewDataBinding, R : BaseRe
 
     protected fun setLocaleLocal(language: String) {
         MyApplication.language = language
+        SharedPref(this).putString(Constants.LANGUAGE_DATA_KEY, language)
+        restartActivity()
+    }
+
+    private fun restartActivity() {
+        finish()
+        startActivity(intent)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(createContextLocale(newBase))
+    }
+
+    private fun createContextLocale(context: Context): Context {
         val locale = Locale(MyApplication.language)
-        val config = Configuration()
+        val config = context.resources.configuration
 
         config.setLocale(locale)
         Locale.setDefault(locale)
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-            baseContext.createConfigurationContext(config)
+            context.createConfigurationContext(config)
         } else {
-            baseContext.resources.updateConfiguration(config, resources.displayMetrics)
+            context.resources.updateConfiguration(config, resources.displayMetrics)
         }
-
-        restartActivity()
-    }
-
-    protected fun restartActivity() {
-        finish()
-        startActivity(intent)
+        return context
     }
 }
