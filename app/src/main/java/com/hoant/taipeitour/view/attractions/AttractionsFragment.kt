@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.hoant.taipeitour.MyApplication
 import com.hoant.taipeitour.R
 import com.hoant.taipeitour.base.BaseAdapter
 import com.hoant.taipeitour.base.BaseFragment
-import com.hoant.taipeitour.base.ViewModelProviderFactory
 import com.hoant.taipeitour.databinding.FragmentAttractionBinding
 import com.hoant.taipeitour.repository.api.ApiClient
 import com.hoant.taipeitour.repository.model.Attraction
@@ -44,13 +43,23 @@ class AttractionsFragment : BaseFragment<AttractionViewModel, FragmentAttraction
     }
 
     override fun createViewModel(app: Application): AttractionViewModel {
-        val factory = ViewModelProviderFactory(app, createRepository())
-        return ViewModelProvider(viewModelStore, factory).get(AttractionViewModel::class.java)
+        return ViewModelProvider(requireActivity()).get(AttractionViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initObserves()
         init()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        viewDataBinding.rcvAttractions.addOnScrollListener(onScrollListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewDataBinding.rcvAttractions.removeOnScrollListener(onScrollListener)
     }
 
     private fun init() {
@@ -59,18 +68,34 @@ class AttractionsFragment : BaseFragment<AttractionViewModel, FragmentAttraction
             layoutManager = LinearLayoutManager(activity)
             adapter = attractionsAdapter
         }
+    }
 
-        viewModel.getAttractions("vi", page)
+    private val onScrollListener = object: RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                val lastPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                val total = viewModel.attractionsResponse.value?.result?.total ?: 0
+//                    if (lastPosition * page < total) {
+//                        page++
+//                    }
+            }
+        }
     }
 
     private fun initObserves() {
+        viewModel.languageSelected.observe(viewLifecycleOwner) {
+            if (it?.isEmpty() == false) {
+                viewModel.getAttractions(it, page)
+            }
+        }
+
         viewModel.attractionsResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.result?.data?.let { data ->
                         attractionsAdapter.differ.submitList(data)
-                        viewDataBinding.rcvAttractions.adapter = attractionsAdapter
                     }
                 }
 

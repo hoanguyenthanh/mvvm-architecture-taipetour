@@ -1,0 +1,5 @@
+<resources>
+    <string name="selection_language">Idioma de selección</string>
+    <string name="address">DIRECCIÓN</string>
+    <string name="last_updated_time">Hora de la última actualización</string>
+</resources>

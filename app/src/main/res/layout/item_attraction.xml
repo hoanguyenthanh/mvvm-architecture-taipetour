@@ -33,6 +33,7 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/Text.Content2"
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,12 +44,13 @@
                 android:text="@{attraction.name}"/>
 
             <TextView
+                style="@style/Text.Content"
                 android:id="@+id/tvIntroduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="@color/light_gray"
                 android:ellipsize="end"
+                android:maxLines="2"
                 textHtmlFormat="@{attraction.introduction}"/>
         </LinearLayout>
 

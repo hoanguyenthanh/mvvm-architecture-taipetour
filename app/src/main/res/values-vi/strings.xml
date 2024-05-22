@@ -1,0 +1,5 @@
+<resources>
+    <string name="selection_language">Chọn ngôn ngữ</string>
+    <string name="address">Địa chỉ</string>
+    <string name="last_updated_time">Cập nhật lần cuối</string>
+</resources>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Text.Title" parent="android:Widget.TextView">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Title2" parent="android:Widget.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_text</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -11,8 +17,27 @@
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
+    <style name="Text.Content1" parent="android:Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dark_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Content2" parent="android:Widget.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Text.ContentUnderline" parent="android:Widget.TextView">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
+
+    <style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
 </resources>

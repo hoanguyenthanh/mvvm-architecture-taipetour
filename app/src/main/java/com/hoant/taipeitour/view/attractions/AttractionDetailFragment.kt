@@ -40,8 +40,7 @@ class AttractionDetailFragment : BaseFragment<AttractionViewModel, FragmentAttra
     }
 
     override fun createViewModel(app: Application): AttractionViewModel {
-        val factory = ViewModelProviderFactory(app, createRepository())
-        return ViewModelProvider(viewModelStore, factory).get(AttractionViewModel::class.java)
+        return ViewModelProvider(requireActivity()).get(AttractionViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

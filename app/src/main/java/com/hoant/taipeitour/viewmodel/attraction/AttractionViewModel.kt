@@ -1,6 +1,7 @@
 package com.hoant.taipeitour.viewmodel.attraction
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoant.taipeitour.MyApplication
@@ -18,6 +19,16 @@ class AttractionViewModel(
     app: Application,
     private val attractionRepository: AttractionRepository
 ) : BaseViewModel(app) {
+
+
+    private val _languageSelected = MutableLiveData<String>().apply { value = MyApplication.language }
+    val languageSelected: LiveData<String> get() = _languageSelected
+
+    fun setLanguageSelected(value: String) {
+        _languageSelected.value = value
+    }
+
+
 
     val attraction: MutableLiveData<Attraction> = MutableLiveData()
     val attractionsResponse: MutableLiveData<Resource<AttractionResponse>> = MutableLiveData()
